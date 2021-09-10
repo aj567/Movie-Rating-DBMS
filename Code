@@ -1,0 +1,58 @@
+# Movie ratings dbms
+from sqlite3 import *
+
+db = connect("movies.db")
+cur = db.cursor()
+##cur.execute('''CREATE TABLE movies
+                   #(ID int, Name text, Stars int, Review text)''')
+
+def give_review():
+    m_id = int(input("Enter movie id"))
+    m_name = input("Enter movie name").lower()
+    m_stars = int(input("Enter stars out of 5"))
+    m_review = input("Enter descriptive review")
+
+    #cur.execute("INSERT INTO movies VALUES (m_id,m_name,m_stars,m_review)")
+    cur.execute("INSERT INTO movies(ID, Name, Stars, Review) VALUES (?,?,?,?)", (m_id, m_name, m_stars, m_review))
+    db.commit()
+    db.close()
+
+def get_review():
+    m_name = input("Enter movie name").lower()
+
+    #cur.execute('SELECT * FROM movies WHERE Name ="?"'), m_name
+    cur.execute("SELECT * FROM movies WHERE Name =?", (m_name,))
+    print(cur.fetchall())
+
+    db.close()
+
+def options():
+
+    print("This is a movie review database management system. You can give reviews of your favourite movies and also look for ratings of any movie")
+    print("Select 1 for giving review")
+    print("select 2 for finding out the reviews of a movie")
+    print(" ")
+
+    choice = int(input("What do you wish to do today?"))
+
+    if choice == 1:
+        give_review()
+
+    elif choice == 2:
+        get_review()
+
+
+
+while True:
+    options()
+
+    a = input("Do you want to go again? Y/N ")
+    print( )
+
+    if a == 'N':
+        print("have a great day!")
+        break
+
+    else:
+        continue
+
