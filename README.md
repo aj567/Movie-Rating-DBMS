@@ -1,2 +1,3 @@
 # Movie-Rating-DBMS
-Project for computer science class
+Movie Review & Rating Database (Using Python SQL connectivity)
+
